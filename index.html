@@ -1,385 +1,193 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMAN 14 Padang | Unggul, Berkarakter, Berwawasan Global</title>
-    <meta name="description" content="Website resmi SMA Negeri 14 Padang — sekolah unggulan dengan visi mewujudkan generasi berprestasi, berkarakter, dan berwawasan global.">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏫</text></svg>">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --green: #1a7a3a;
-            --green-light: #2ecc71;
-            --gold: #f1c40f;
-            --dark: #1a1a2e;
-            --gray: #f4f6f9;
-            --text: #333;
-            --white: #fff;
-        }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--text); line-height: 1.7; overflow-x: hidden; }
-
-        /* NAV */
-        nav {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: rgba(26,26,46,.92); backdrop-filter: blur(12px);
-            padding: 12px 24px; display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 2px solid var(--gold);
-        }
-        nav .logo { color: var(--white); font-weight: 700; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
-        nav .logo span { color: var(--gold); }
-        nav ul { list-style: none; display: flex; gap: 24px; }
-        nav a { color: #ccc; text-decoration: none; font-size: .9rem; font-weight: 500; transition: color .2s; }
-        nav a:hover { color: var(--gold); }
-        .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
-        .menu-toggle span { width: 26px; height: 2px; background: var(--white); border-radius: 2px; transition: .3s; }
-        @media (max-width: 768px) {
-            nav ul { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(26,26,46,.98); flex-direction: column; padding: 16px 24px; gap: 16px; }
-            nav ul.open { display: flex; }
-            .menu-toggle { display: flex; }
-        }
-
-        /* HERO */
-        .hero {
-            min-height: 100vh; display: flex; align-items: center; justify-content: center;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            position: relative; overflow: hidden; padding: 80px 24px 40px;
-        }
-        .hero::before {
-            content: ''; position: absolute; width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(46,204,113,.08) 0%, transparent 70%);
-            top: -200px; right: -200px; border-radius: 50%;
-        }
-        .hero::after {
-            content: ''; position: absolute; width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(241,196,15,.06) 0%, transparent 70%);
-            bottom: -100px; left: -100px; border-radius: 50%;
-        }
-        .hero-content { text-align: center; position: relative; z-index: 1; max-width: 780px; }
-        .hero-badge {
-            display: inline-block; background: rgba(241,196,15,.15); border: 1px solid rgba(241,196,15,.3);
-            color: var(--gold); padding: 6px 18px; border-radius: 20px; font-size: .8rem; font-weight: 600;
-            margin-bottom: 20px; letter-spacing: 1px;
-        }
-        .hero h1 { font-size: 3.2rem; font-weight: 800; color: var(--white); margin-bottom: 16px; line-height: 1.2; }
-        .hero h1 span { background: linear-gradient(135deg, var(--green-light), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { font-size: 1.15rem; color: rgba(255,255,255,.7); max-width: 600px; margin: 0 auto 32px; }
-        .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-        .btn { padding: 14px 36px; border-radius: 30px; font-weight: 600; font-size: .95rem; text-decoration: none; transition: all .3s; display: inline-block; }
-        .btn-primary { background: var(--green-light); color: var(--dark); }
-        .btn-primary:hover { background: var(--gold); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(46,204,113,.3); }
-        .btn-outline { border: 2px solid rgba(255,255,255,.3); color: var(--white); }
-        .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
-        .hero-stats { display: flex; justify-content: center; gap: 48px; margin-top: 48px; }
-        .hero-stats div { text-align: center; }
-        .hero-stats .num { font-size: 1.8rem; font-weight: 800; color: var(--gold); }
-        .hero-stats .label { font-size: .8rem; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: 1px; }
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 2.2rem; }
-            .hero-stats { gap: 24px; flex-wrap: wrap; }
-        }
-
-        /* SECTIONS */
-        section { padding: 80px 24px; }
-        .container { max-width: 1100px; margin: 0 auto; }
-        .section-title { font-size: 2rem; font-weight: 700; color: var(--dark); margin-bottom: 8px; text-align: center; }
-        .section-sub { text-align: center; color: #666; margin-bottom: 48px; font-size: 1rem; }
-        .section-title span { color: var(--green); }
-
-        /* ABOUT */
-        #about { background: var(--white); }
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-        .about-text p { margin-bottom: 16px; }
-        .about-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .about-card {
-            background: var(--gray); padding: 20px; border-radius: 12px; text-align: center;
-            border-left: 3px solid var(--green); transition: transform .2s;
-        }
-        .about-card:hover { transform: translateY(-3px); }
-        .about-card .icon { font-size: 1.8rem; margin-bottom: 6px; }
-        .about-card h4 { font-size: .95rem; color: var(--dark); }
-        .about-card p { font-size: .8rem; color: #666; }
-        @media (max-width: 768px) {
-            .about-grid { grid-template-columns: 1fr; }
-            .about-cards { grid-template-columns: 1fr; }
-        }
-
-        /* VISI MISI */
-        #visi { background: var(--gray); }
-        .visi-box {
-            background: var(--white); padding: 40px; border-radius: 16px; max-width: 800px; margin: 0 auto;
-            box-shadow: 0 4px 20px rgba(0,0,0,.06);
-        }
-        .visi-box h3 { color: var(--green); font-size: 1.3rem; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
-        .visi-box p { margin-bottom: 24px; font-size: 1.05rem; }
-        .visi-box ul { list-style: none; }
-        .visi-box li { padding: 8px 0; border-bottom: 1px solid #eee; display: flex; gap: 12px; }
-        .visi-box li:last-child { border: none; }
-        .visi-box li::before { content: '✓'; color: var(--green); font-weight: 700; }
-
-        /* PROGRAMS */
-        #program { background: var(--white); }
-        .program-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-        .program-card {
-            background: var(--gray); border-radius: 16px; padding: 32px; text-align: center;
-            transition: all .3s; border: 1px solid transparent;
-        }
-        .program-card:hover { border-color: var(--green); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,.08); }
-        .program-card .icon { font-size: 2.4rem; margin-bottom: 12px; }
-        .program-card h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--dark); }
-        .program-card p { font-size: .9rem; color: #666; }
-
-        /* TEACHERS */
-        #guru { background: var(--gray); }
-        .teacher-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; }
-        .teacher-card { text-align: center; background: var(--white); padding: 24px 16px; border-radius: 16px; transition: transform .2s; }
-        .teacher-card:hover { transform: translateY(-3px); }
-        .teacher-card .avatar {
-            width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--green), var(--green-light));
-            margin: 0 auto 12px; display: flex; align-items: center; justify-content: center;
-            font-size: 2rem; color: var(--white); font-weight: 700;
-        }
-        .teacher-card h4 { font-size: 1rem; color: var(--dark); }
-        .teacher-card p { font-size: .8rem; color: #888; }
-
-        /* NEWS */
-        #berita { background: var(--white); }
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-        .news-card { border-radius: 16px; overflow: hidden; background: var(--gray); transition: transform .2s; }
-        .news-card:hover { transform: translateY(-3px); }
-        .news-card img { width: 100%; height: 200px; object-fit: cover; }
-        .news-body { padding: 20px; }
-        .news-body .tag { font-size: .75rem; color: var(--green); font-weight: 600; text-transform: uppercase; }
-        .news-body h3 { font-size: 1rem; margin: 6px 0 8px; }
-        .news-body p { font-size: .85rem; color: #666; }
-
-        /* GALLERY PLACEHOLDER */
-        #galeri { background: var(--gray); }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
-        .gallery-item {
-            aspect-ratio: 4/3; border-radius: 12px; overflow: hidden;
-            background: linear-gradient(135deg, var(--green), #0f3460);
-            display: flex; align-items: center; justify-content: center;
-            color: rgba(255,255,255,.3); font-size: 2rem; transition: transform .2s;
-        }
-        .gallery-item:hover { transform: scale(1.02); }
-
-        /* CONTACT */
-        #contact { background: var(--dark); color: var(--white); }
-        #contact .section-title { color: var(--white); }
-        #contact .section-sub { color: rgba(255,255,255,.5); }
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
-        .contact-info h3 { font-size: 1.2rem; margin-bottom: 16px; }
-        .contact-info p { color: rgba(255,255,255,.6); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-        .contact-info a { color: var(--gold); text-decoration: none; }
-        .contact-info a:hover { text-decoration: underline; }
-        .contact-form input, .contact-form textarea {
-            width: 100%; padding: 14px 18px; margin-bottom: 14px; border: none; border-radius: 10px;
-            background: rgba(255,255,255,.08); color: var(--white); font-family: inherit; font-size: .95rem;
-            outline: none; transition: background .2s;
-        }
-        .contact-form input:focus, .contact-form textarea:focus { background: rgba(255,255,255,.14); }
-        .contact-form textarea { height: 120px; resize: vertical; }
-        .contact-form button { background: var(--gold); color: var(--dark); border: none; padding: 14px 36px; border-radius: 30px; font-weight: 700; cursor: pointer; transition: all .3s; }
-        .contact-form button:hover { background: var(--green-light); transform: translateY(-2px); }
-        @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
-
-        /* FOOTER */
-        footer {
-            background: #111; color: rgba(255,255,255,.4); text-align: center;
-            padding: 24px; font-size: .85rem; border-top: 1px solid rgba(255,255,255,.05);
-        }
-        footer a { color: var(--gold); text-decoration: none; }
-
-        /* RESPONSIVE */
-        @media (max-width: 600px) {
-            section { padding: 48px 16px; }
-            .section-title { font-size: 1.6rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SMAN 14 Padang — Unggul, Berkarakter, Berwawasan Lingkungan</title>
+<meta name="description" content="SMA Negeri 14 Padang — sekolah unggul di Koto Tangah dengan akreditasi A, jurusan IPA dan IPS, serta puluhan ekstrakurikuler.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-    <div class="logo"><span>SMAN</span> 14 Padang</div>
-    <ul id="nav-menu">
-        <li><a href="#about">Tentang</a></li>
-        <li><a href="#visi">Visi & Misi</a></li>
-        <li><a href="#program">Program</a></li>
-        <li><a href="#guru">Guru</a></li>
-        <li><a href="#berita">Berita</a></li>
-        <li><a href="#galeri">Galeri</a></li>
-        <li><a href="#contact">Kontak</a></li>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <svg class="nav-logo-gonjong" viewBox="0 0 30 30" fill="none"><path d="M15 2L2 18h26L15 2z" fill="#D4A017"/><path d="M15 6L6 18h18L15 6z" fill="#8B0000"/></svg>
+      SMAN 14 Padang
+    </a>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Beranda</a></li>
+      <li><a href="profil.html">Profil</a></li>
+      <li><a href="akademik.html">Akademik</a></li>
+      <li><a href="ekskul.html">Ekskul</a></li>
+      <li><a href="ppdb.html">PPDB</a></li>
+      <li><a href="berita.html">Berita</a></li>
+      <li><a href="kontak.html">Kontak</a></li>
     </ul>
-    <div class="menu-toggle" onclick="document.getElementById('nav-menu').classList.toggle('open')">
-        <span></span><span></span><span></span>
-    </div>
+  </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-    <div class="hero-content">
-        <div class="hero-badge">★ SMA NEGERI 14 PADANG</div>
-        <h1>Didik Generasi <span>Unggul & Berkarakter</span></h1>
-        <p>Sekolah unggulan di Kota Padang yang berkomitmen mencetak generasi berprestasi, berakhlak mulia, dan siap menghadapi tantangan global.</p>
-        <div class="hero-buttons">
-            <a href="#about" class="btn btn-primary">Kenali Kami →</a>
-            <a href="#contact" class="btn btn-outline">Hubungi Kami</a>
-        </div>
-        <div class="hero-stats">
-            <div><div class="num">800+</div><div class="label">Siswa</div></div>
-            <div><div class="num">60+</div><div class="label">Tenaga Pendidik</div></div>
-            <div><div class="num">20+</div><div class="label">Tahun Berdiri</div></div>
-            <div><div class="num">30+</div><div class="label">Prestasi</div></div>
-        </div>
+  <div class="hero-pattern"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p style="color:var(--gold);font-size:.82rem;text-transform:uppercase;letter-spacing:.14em;margin-bottom:.5rem;font-weight:600">NPSN 10303590 · Akreditasi A</p>
+      <h1>SMAN <span class="hl">14</span> Padang<br>Unggul &amp; Berkarakter</h1>
+      <p>Terwujudnya insan yang beriman, bertaqwa, unggul dalam prestasi, berkarakter, dan berwawasan lingkungan — berlandaskan falsafah Adat Basandi Syarak, Syarak Basandi Kitabullah.</p>
+      <div style="display:flex;gap:.8rem;flex-wrap:wrap">
+        <a href="ppdb.html" class="btn btn-primary">Info PPDB <span style="margin-left:6px">→</span></a>
+        <a href="profil.html" class="btn btn-outline">Profil Sekolah</a>
+      </div>
     </div>
+    <div class="hero-deco">
+      <!-- Gonjong roof silhouette -->
+      <svg viewBox="0 0 280 340" fill="none">
+        <path d="M140 20L20 160h50L140 60l70 100h50L140 20z" fill="currentColor"/>
+        <path d="M140 50L50 180h30l60-90 60 90h30L140 50z" fill="currentColor" opacity=".7"/>
+        <line x1="78" y1="190" x2="78" y2="310" stroke="currentColor" stroke-width=".5" opacity=".3"/>
+        <line x1="202" y1="190" x2="202" y2="310" stroke="currentColor" stroke-width=".5" opacity=".3"/>
+        <path d="M60 310h160l-20-30H80l-20 30z" fill="currentColor" opacity=".5"/>
+        <text x="140" y="295" text-anchor="middle" fill="currentColor" opacity=".2" font-size="8">SMAN 14 PADANG</text>
+      </svg>
+    </div>
+  </div>
 </section>
 
-<section id="about">
-    <div class="container">
-        <h2 class="section-title">Tentang <span>Kami</span></h2>
-        <p class="section-sub">SMA Negeri 14 Padang — sekolah unggulan di Sumatera Barat</p>
-        <div class="about-grid">
-            <div class="about-text">
-                <p>SMA Negeri 14 Padang adalah salah satu sekolah menengah atas negeri terbaik di Kota Padang, Sumatera Barat. Berdiri sejak tahun 2004, SMAN 14 Padang terus berkembang menjadi institusi pendidikan yang melahirkan generasi muda berprestasi di bidang akademik maupun non-akademik.</p>
-                <p>Berlokasi di Kecamatan Koto Tangah, sekolah ini dikenal dengan budaya disiplin, religius, serta lingkungan belajar yang nyaman dan kondusif. Kurikulum yang diterapkan mengakomodasi kebutuhan siswa di era digital sambil tetap memegang teguh nilai-nilai karakter bangsa.</p>
-                <p><strong>Akreditasi:</strong> A (Unggul) — <strong>NPSN:</strong> 10303590</p>
-            </div>
-            <div class="about-cards">
-                <div class="about-card"><div class="icon">📖</div><h4>Kurikulum Merdeka</h4><p>Pembelajaran berbasis proyek, fleksibel, dan berpusat pada siswa</p></div>
-                <div class="about-card"><div class="icon">🏅</div><h4>Ekstrakurikuler</h4><p>30+ ekskul aktif dari olahraga hingga robotik</p></div>
-                <div class="about-card"><div class="icon">🌐</div><h4>Digital Learning</h4><p>Lab komputer, smart classroom, dan akses internet penuh</p></div>
-                <div class="about-card"><div class="icon">🤝</div><h4>Kolaborasi</h4><p>Kerjasama dengan perguruan tinggi dan industri</p></div>
-            </div>
+<!-- SAMBUTAN KEPALA SEKOLAH -->
+<section>
+  <div class="section-inner">
+    <div class="split">
+      <div class="welcome">
+        <span class="section-label">Sambutan</span>
+        <h2>Selamat Datang di SMAN 14 Padang</h2>
+        <p>Assalamu'alaikum warahmatullahi wabarakatuh.</p>
+        <p>Puji syukur ke hadirat Allah SWT, SMAN 14 Padang terus berkomitmen mencetak generasi unggul yang beriman, berkarakter, dan berdaya saing global. Dengan dukungan tenaga pendidik profesional dan kurikulum merdeka, kami mendorong setiap siswa mengembangkan potensi terbaiknya — baik di bidang akademik, seni, budaya, maupun olahraga.</p>
+        <p>Sebagai sekolah berakreditasi A di Kecamatan Koto Tangah, kami bangga menjadi rumah bagi ribuan alumni yang telah berkontribusi di berbagai bidang. Mari bersama wujudkan generasi emas Sumatera Barat.</p>
+        <div class="signature">
+          <div class="name">Drs. Supriadi, M.Pd</div>
+          <div class="title">Kepala SMAN 14 Padang</div>
         </div>
+      </div>
+      <div class="img-frame img-frame-3x2">
+        <svg class="placeholder" viewBox="0 0 80 80" fill="none"><circle cx="40" cy="28" r="12" stroke="currentColor" stroke-width="1.5"/><path d="M18 72c0-12.2 9.8-22 22-22s22 9.8 22 22" stroke="currentColor" stroke-width="1.5"/><circle cx="40" cy="40" r="37" stroke="currentColor" stroke-width="1" opacity=".3"/></svg>
+      </div>
     </div>
+  </div>
 </section>
 
-<section id="visi">
-    <div class="container">
-        <h2 class="section-title">Visi & <span>Misi</span></h2>
-        <p class="section-sub">Landasan utama dalam setiap langkah pendidikan kami</p>
-        <div class="visi-box">
-            <h3>🌟 Visi</h3>
-            <p><em>"Terwujudnya insan yang beriman, bertaqwa, unggul dalam prestasi, berkarakter, dan berwawasan lingkungan."</em></p>
-            <h3>🎯 Misi</h3>
-            <ul>
-                <li>Menyelenggarakan pendidikan berbasis iman dan taqwa</li>
-                <li>Mengembangkan potensi siswa secara optimal melalui pembelajaran inovatif</li>
-                <li>Menumbuhkan semangat berprestasi di bidang akademik dan non-akademik</li>
-                <li>Membentuk karakter siswa yang disiplin, jujur, dan bertanggung jawab</li>
-                <li>Menciptakan budaya sadar lingkungan di lingkungan sekolah</li>
-                <li>Membangun kerjasama dengan stakeholder untuk peningkatan mutu pendidikan</li>
-            </ul>
-        </div>
+<!-- PRESTASI BANNER -->
+<section style="background:var(--marawa);padding:3rem 1.5rem">
+  <div class="section-inner" style="text-align:center">
+    <p style="color:var(--gold);font-size:.85rem;text-transform:uppercase;letter-spacing:.15em;font-weight:600">Prestasi Terkini</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.5rem;margin-top:1.2rem">
+      <div><div style="font-size:1.6rem;font-weight:800;color:var(--gold)}">🥇</div><p style="color:rgba(255,255,245,.7);font-size:.82rem;margin-top:.3rem">OSN Matematika Provinsi</p></div>
+      <div><div style="font-size:1.6rem;font-weight:800;color:var(--gold)}">🥇</div><p style="color:rgba(255,255,245,.7);font-size:.82rem;margin-top:.3rem">FLS2N Tari Tradisional</p></div>
+      <div><div style="font-size:1.6rem;font-weight:800;color:var(--gold)}">🥇</div><p style="color:rgba(255,255,245,.7);font-size:.82rem;margin-top:.3rem">LT-V Pramuka</p></div>
+      <div><div style="font-size:1.6rem;font-weight:800;color:var(--gold)}">🥇</div><p style="color:rgba(255,255,245,.7);font-size:.82rem;margin-top:.3rem">Silat Sumbar</p></div>
     </div>
+  </div>
 </section>
 
-<section id="program">
-    <div class="container">
-        <h2 class="section-title">Program <span>Unggulan</span></h2>
-        <p class="section-sub">Program-program andalan yang membedakan SMAN 14 Padang</p>
-        <div class="program-grid">
-            <div class="program-card"><div class="icon">🔬</div><h3>Kelas Riset</h3><p>Program pembinaan penelitian dan karya ilmiah bagi siswa berbakat di bidang sains.</p></div>
-            <div class="program-card"><div class="icon">💻</div><h3>Digital Literacy</h3><p>Pelatihan coding, desain grafis, dan literasi digital untuk menghadapi era industri 4.0.</p></div>
-            <div class="program-card"><div class="icon">🌍</div><h3>English Club</h3><p>Program penguasaan bahasa Inggris aktif melalui debat, public speaking, dan conversation.</p></div>
-            <div class="program-card"><div class="icon">🏆</div><h3>Olimpiade Sains</h3><p>Pembinaan intensif untuk olimpiade sains nasional bidang matematika, fisika, kimia, biologi.</p></div>
-            <div class="program-card"><div class="icon">🎨</div><h3>Seni & Budaya</h3><p>Pengembangan bakat seni tari, musik, teater, dan seni rupa berbasis budaya Minangkabau.</p></div>
-            <div class="program-card"><div class="icon">⚽</div><h3>Olahraga Prestasi</h3><p>Pembinaan atlet muda di cabang futsal, basket, voli, pencak silat, dan atletik.</p></div>
-        </div>
+<!-- BERITA TERBARU -->
+<section class="section-drawn">
+  <div class="section-inner">
+    <div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:1.5rem;flex-wrap:wrap">
+      <div>
+        <span class="section-label">Berita</span>
+        <h2 style="margin-bottom:0">Terbaru dari SMAN 14</h2>
+      </div>
+      <a href="berita.html" style="color:var(--marawa);font-size:.88rem;font-weight:600;text-decoration:none">Lihat semua →</a>
     </div>
+    <div class="news">
+      <div class="news-card">
+        <div class="news-card-img"><svg viewBox="0 0 60 60" fill="none"><path d="M12 10h36v40H12V10z" stroke="currentColor" stroke-width="1.5"/><circle cx="22" cy="22" r="4" stroke="currentColor" stroke-width="1"/><path d="M22 34l8-8 10 10M40 30l4-4 6 6" stroke="currentColor" stroke-width="1"/></svg></div>
+        <div class="news-card-body">
+          <div class="news-date">25 Juni 2026</div>
+          <h3><a href="#">Lomba Pramuka LT-V Tingkat Kota Padang: SMAN 14 Raih Juara Umum</a></h3>
+          <p>Regu Pramuka SMAN 14 Padang berhasil membawa pulang 6 piala sekaligus dalam Lomba Tingkat V se-Kota Padang yang digelar di Bumi Perkemahan Pramuka.</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-card-img"><svg viewBox="0 0 60 60" fill="none"><rect x="12" y="10" width="36" height="40" rx="3" stroke="currentColor" stroke-width="1.5"/><circle cx="30" cy="28" r="8" stroke="currentColor" stroke-width="1.3"/><path d="M22 46c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="1.3"/></svg></div>
+        <div class="news-card-body">
+          <div class="news-date">18 Juni 2026</div>
+          <h3><a href="#">Workshop Kurikulum Merdeka: Guru SMAN 14 Ikuti Pelatihan Asesmen Diagnostik</a></h3>
+          <p>Seluruh guru SMAN 14 Padang mengikuti workshop Implementasi Kurikulum Merdeka fase E & F yang difasilitasi Dinas Pendidikan Provinsi Sumbar.</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-card-img"><svg viewBox="0 0 60 60" fill="none"><path d="M12 10h36v40H12V10z" stroke="currentColor" stroke-width="1.5"/><path d="M22 20h16M22 28h16M22 36h10" stroke="currentColor" stroke-width="1.3"/></svg></div>
+        <div class="news-card-body">
+          <div class="news-date">10 Juni 2026</div>
+          <h3><a href="#">Pesantren Ramadhan 1447 H: Karakter Religius Siswa SMAN 14</a></h3>
+          <p>Kegiatan pesantren kilat selama bulan Ramadhan diikuti seluruh siswa kelas X dan XI dengan agenda tadarus, kajian, dan buka puasa bersama.</p>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-card-img"><svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="18" stroke="currentColor" stroke-width="1.5"/><path d="M30 16v24M16 30h28" stroke="currentColor" stroke-width="1" opacity=".4"/></svg></div>
+        <div class="news-card-body">
+          <div class="news-date">2 Juni 2026</div>
+          <h3><a href="#">OSN Tingkat Provinsi: Siswa SMAN 14 Lolos ke Babak Nasional</a></h3>
+          <p>Dua siswa SMAN 14 Padang lolos seleksi OSN tingkat Provinsi Sumatera Barat dan akan mewakili Sumbar di ajang OSN Nasional bidang Matematika dan Fisika.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="guru">
-    <div class="container">
-        <h2 class="section-title">Tenaga <span>Pendidik</span></h2>
-        <p class="section-sub">Guru profesional dan berdedikasi tinggi</p>
-        <div class="teacher-grid">
-            <div class="teacher-card"><div class="avatar">DS</div><h4>Drs. Supriadi, M.Pd</h4><p>Kepala Sekolah</p></div>
-            <div class="teacher-card"><div class="avatar">RN</div><h4>Rina Novita, S.Pd, M.Si</h4><p>Wakil Kurikulum</p></div>
-            <div class="teacher-card"><div class="avatar">AF</div><h4>Afrinaldi, S.Pd</h4><p>Wakil Kesiswaan</p></div>
-            <div class="teacher-card"><div class="avatar">YM</div><h4>Yuli Marlia, S.Pd</h4><p>Guru Matematika</p></div>
-            <div class="teacher-card"><div class="avatar">HD</div><h4>Hendra, S.Pd, M.Pd</h4><p>Guru Fisika</p></div>
-        </div>
-    </div>
+<!-- PPDB CTA -->
+<section style="background:var(--dark);padding:3.5rem 1.5rem">
+  <div class="section-inner" style="text-align:center">
+    <h2 style="color:var(--white);margin-bottom:.5rem">PPDB <span style="color:var(--gold)">2026/2027</span></h2>
+    <p style="color:rgba(255,255,245,.55);font-size:.92rem;max-width:560px;margin:0 auto 1.5rem">Pendaftaran Peserta Didik Baru SMAN 14 Padang telah dibuka. Cek persyaratan, jadwal, dan jalur pendaftaran.</p>
+    <a href="ppdb.html" class="btn btn-primary">Daftar Sekarang <span style="margin-left:6px">→</span></a>
+  </div>
 </section>
 
-<section id="berita">
-    <div class="container">
-        <h2 class="section-title">Berita <span>Terbaru</span></h2>
-        <p class="section-sub">Informasi dan kegiatan terkini dari SMAN 14 Padang</p>
-        <div class="news-grid">
-            <div class="news-card">
-                <div style="background: linear-gradient(135deg,#1a7a3a,#2ecc71); height:200px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:2.5rem;">🏆</div>
-                <div class="news-body">
-                    <div class="tag">Prestasi</div>
-                    <h3>Siswa SMAN 14 Raih Medali Emas OSN Tingkat Provinsi</h3>
-                    <p>Tim Olimpiade Sains SMAN 14 Padang berhasil membawa pulang 3 medali emas dan 2 perak.</p>
-                </div>
-            </div>
-            <div class="news-card">
-                <div style="background: linear-gradient(135deg,#0f3460,#1a7a3a); height:200px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:2.5rem;">🎓</div>
-                <div class="news-body">
-                    <div class="tag">Acara</div>
-                    <h3>Pelepasan Siswa Kelas XII Tahun Ajaran 2025/2026</h3>
-                    <p>Acara perpisahan yang khidmat dan meriah dihadiri oleh seluruh siswa, guru, dan orang tua.</p>
-                </div>
-            </div>
-            <div class="news-card">
-                <div style="background: linear-gradient(135deg,#f1c40f,#e67e22); height:200px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:2.5rem;">💻</div>
-                <div class="news-body">
-                    <div class="tag">Kegiatan</div>
-                    <h3>Workshop Digital Literacy: Siswa Belajar Coding Dasar</h3>
-                    <p>Program literasi digital bekerjasama dengan universitas mitra untuk membekali siswa skill teknologi.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="galeri">
-    <div class="container">
-        <h2 class="section-title">Galeri <span>Foto</span></h2>
-        <p class="section-sub">Momen-momen berharga di SMAN 14 Padang</p>
-        <div class="gallery-grid">
-            <div class="gallery-item">📸</div>
-            <div class="gallery-item">📸</div>
-            <div class="gallery-item">📸</div>
-            <div class="gallery-item">📸</div>
-            <div class="gallery-item">📸</div>
-            <div class="gallery-item">📸</div>
-        </div>
-    </div>
-</section>
-
-<section id="contact">
-    <div class="container">
-        <h2 class="section-title">Hubungi <span style="color:var(--gold)">Kami</span></h2>
-        <p class="section-sub">Silakan hubungi kami untuk informasi lebih lanjut</p>
-        <div class="contact-grid">
-            <div class="contact-info">
-                <h3>📍 Alamat</h3>
-                <p>📌 Jl. Raya Koto Tangah, Kel. Balai Gadang, Kec. Koto Tangah, Kota Padang, Sumatera Barat 25586</p>
-                <p>📞 (0751) 123456</p>
-                <p>✉️ <a href="mailto:info@sman14padang.sch.id">info@sman14padang.sch.id</a></p>
-                <p>🌐 sman14padang.sch.id</p>
-                <h3 style="margin-top:24px">🕒 Jam Kerja</h3>
-                <p>Senin – Jumat: 07:30 – 16:00 WIB</p>
-            </div>
-            <div class="contact-form">
-                <input type="text" placeholder="Nama Lengkap">
-                <input type="email" placeholder="Email">
-                <input type="text" placeholder="Subjek">
-                <textarea placeholder="Pesan..."></textarea>
-                <button type="button">Kirim Pesan →</button>
-            </div>
-        </div>
-    </div>
-</section>
-
+<!-- FOOTER SULAMAN -->
 <footer>
-    <p>© 2026 <a href="#">SMAN 14 Padang</a>. All rights reserved.</p>
+  <div class="footer-sulaman">
+    <svg viewBox="0 0 1200 36" preserveAspectRatio="none"><path d="M0 36V20c40-6 100-14 160-10s120 12 180 16 130-6 180-12 100-14 160-4 110 16 170 14 100-10 160-14 120 8 150 14l40 12H0z" fill="#8B0000" opacity=".6"/><path d="M0 36V26c60-8 140-16 220-8s140 14 220 10 140-10 220-8 130 8 200 6 140-4 200-2 130 6 160 12H0z" fill="#D4A017" opacity=".4"/></svg>
+  </div>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">SMAN 14 Padang</div>
+      <p>NPSN 10303590 — Akreditasi A<br>Jl. Raya Koto Tangah, Kel. Balai Gadang<br>Kec. Koto Tangah, Kota Padang<br>Sumatera Barat</p>
+    </div>
+    <div class="footer-col">
+      <h4>Tautan</h4>
+      <ul>
+        <li><a href="profil.html">Profil</a></li>
+        <li><a href="akademik.html">Akademik</a></li>
+        <li><a href="ekskul.html">Ekstrakurikuler</a></li>
+        <li><a href="ppdb.html">PPDB</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Informasi</h4>
+      <ul>
+        <li><a href="berita.html">Berita</a></li>
+        <li><a href="kontak.html">Kontak</a></li>
+        <li><a href="#">Kalender Akademik</a></li>
+        <li><a href="#">Pengumuman</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Ikuti Kami</h4>
+      <div class="social-links">
+        <a href="#" class="social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+        <a href="#" class="social-link" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 6.5a3 3 0 00-3-3h-15a3 3 0 00-3 3v11a3 3 0 003 3h15a3 3 0 003-3V6.5z"/><polygon points="10,9 16,12 10,15" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" class="social-link" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8" stroke="currentColor"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 SMAN 14 Padang. Hak cipta dilindungi undang-undang.</div>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>

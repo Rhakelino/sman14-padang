@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Kontak — SMAN 14 Padang</title>
+<meta name="description" content="Kontak SMAN 14 Padang: alamat, telepon, email, peta lokasi, dan form pesan.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><svg class="nav-logo-gonjong" viewBox="0 0 30 30" fill="none"><path d="M15 2L2 18h26L15 2z" fill="#D4A017"/><path d="M15 6L6 18h18L15 6z" fill="#8B0000"/></svg> SMAN 14 Padang</a>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="index.html">Beranda</a></li>
+      <li><a href="profil.html">Profil</a></li>
+      <li><a href="akademik.html">Akademik</a></li>
+      <li><a href="ekskul.html">Ekskul</a></li>
+      <li><a href="ppdb.html">PPDB</a></li>
+      <li><a href="berita.html">Berita</a></li>
+      <li><a href="kontak.html" class="active">Kontak</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <h1>Kontak Kami</h1>
+    <p>Alamat, peta, dan formulir pesan SMAN 14 Padang</p>
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<section>
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div>
+        <span class="section-label">Hubungi Kami</span>
+        <h2 style="margin-bottom:1rem">Kirim Pesan</h2>
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="nama">Nama</label>
+            <input type="text" id="nama" name="nama" placeholder="Nama lengkap" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="contoh@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="subjek">Subjek</label>
+            <input type="text" id="subjek" name="subjek" placeholder="Subjek pesan">
+          </div>
+          <div class="form-group">
+            <label for="pesan">Pesan</label>
+            <textarea id="pesan" name="pesan" placeholder="Tulis pesan Anda..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+        </form>
+      </div>
+
+      <div>
+        <span class="section-label">Informasi</span>
+        <h2 style="margin-bottom:1rem">Alamat &amp; Kontak</h2>
+        <div class="contact-info">
+          <div class="contact-item">
+            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <strong>Alamat</strong><br>
+              Jl. Raya Koto Tangah, Kel. Balai Gadang<br>
+              Kec. Koto Tangah, Kota Padang<br>
+              Sumatera Barat 25586
+            </div>
+          </div>
+          <div class="contact-item">
+            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            <div>
+              <strong>Telepon</strong><br>
+              0812-6688-7712 (Panitia PPDB)<br>
+              0751-123456 (Sekolah)
+            </div>
+          </div>
+          <div class="contact-item">
+            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <div>
+              <strong>Email</strong><br>
+              info@sman14-padang.sch.id<br>
+              ppdb@sman14-padang.sch.id
+            </div>
+          </div>
+          <div class="contact-item">
+            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <div>
+              <strong>Jam Kerja</strong><br>
+              Senin–Jumat: 07.30–15.30 WIB<br>
+              Sabtu: 08.00–12.00 WIB
+            </div>
+          </div>
+          <div class="social-links" style="margin-top:1.5rem">
+            <a href="#" class="social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+            <a href="#" class="social-link" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 6.5a3 3 0 00-3-3h-15a3 3 0 00-3 3v11a3 3 0 003 3h15a3 3 0 003-3V6.5z"/><polygon points="10,9 16,12 10,15" fill="currentColor" stroke="none"/></svg></a>
+            <a href="#" class="social-link" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg></a>
+            <a href="#" class="social-link" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 104 4V4h4a4 4 0 004 4"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section style="background:var(--white);padding:2rem 1.5rem">
+  <div class="section-inner">
+    <span class="section-label">Lokasi</span>
+    <h2 style="margin-bottom:1rem">Temukan Kami</h2>
+    <div class="map-frame">
+      <!-- Google Maps embed placeholder — ganti src dengan alamat asli -->
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.704872329955!2d100.3581731!3d-0.8891274!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2fd4b87b9c9c9c9d%3A0x8c9c9c9c9c9c9c9c!2sSMA%20Negeri%2014%20Padang!5e0!3m2!1sid!2sid!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-sulaman"><svg viewBox="0 0 1200 36" preserveAspectRatio="none"><path d="M0 36V20c40-6 100-14 160-10s120 12 180 16 130-6 180-12 100-14 160-4 110 16 170 14 100-10 160-14 120 8 150 14l40 12H0z" fill="#8B0000" opacity=".6"/><path d="M0 36V26c60-8 140-16 220-8s140 14 220 10 140-10 220-8 130 8 200 6 140-4 200-2 130 6 160 12H0z" fill="#D4A017" opacity=".4"/></svg></div>
+  <div class="footer-inner">
+    <div class="footer-brand"><div class="footer-logo">SMAN 14 Padang</div><p>NPSN 10303590 — Akreditasi A<br>Jl. Raya Koto Tangah, Kel. Balai Gadang, Kec. Koto Tangah, Kota Padang</p></div>
+    <div class="footer-col"><h4>Tautan</h4><ul><li><a href="profil.html">Profil</a></li><li><a href="akademik.html">Akademik</a></li><li><a href="ekskul.html">Ekskul</a></li><li><a href="ppdb.html">PPDB</a></li></ul></div>
+    <div class="footer-col"><h4>Info</h4><ul><li><a href="berita.html">Berita</a></li><li><a href="kontak.html">Kontak</a></li></ul></div>
+    <div class="footer-col"><h4>Ikuti</h4><div class="social-links"><a href="#" class="social-link" aria-label="IG"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a><a href="#" class="social-link" aria-label="YT"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 6.5a3 3 0 00-3-3h-15a3 3 0 00-3 3v11a3 3 0 003 3h15a3 3 0 003-3V6.5z"/><polygon points="10,9 16,12 10,15" fill="currentColor" stroke="none"/></svg></a></div></div>
+  </div>
+  <div class="footer-bottom">© 2026 SMAN 14 Padang</div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
