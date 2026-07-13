@@ -57,22 +57,155 @@
 </section>
 
 <!-- VISI MISI -->
-<section style="background:var(--white)">
-  <div class="section-inner">
+<section style="background:var(--white);position:relative;overflow:hidden">
+  <!-- decorative top border -->
+  <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--green),var(--gold),var(--green),var(--gold),var(--green))"></div>
+  <!-- bg pattern subtle -->
+  <div style="position:absolute;inset:0;opacity:.03;background-image:repeating-linear-gradient(45deg,var(--green) 0,var(--green) 1px,transparent 1px,transparent 30px)"></div>
+  <div class="section-inner" style="position:relative;z-index:1">
+    <div style="text-align:center;margin-bottom:2.5rem">
+      <span class="section-label">Visi &amp; Misi</span>
+      <h2>Landasan &amp; Arah Tujuan</h2>
+    </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem">
-      <div style="padding:2rem;border-left:4px solid var(--marawa)">
-        <span class="section-label">Visi</span>
-        <p style="font-size:1.15rem;font-weight:600;font-style:italic;color:var(--dark);line-height:1.6">"Terwujudnya insan yang beriman, bertaqwa, unggul dalam prestasi, berkarakter, dan berwawasan lingkungan"</p>
+      <!-- VISI CARD -->
+      <div style="
+        position:relative;background:linear-gradient(135deg,var(--cream-dark),var(--white));
+        padding:2.5rem 2rem;border-radius:0;overflow:hidden;
+        box-shadow:0 4px 20px rgba(27,94,32,.08);
+        border:1px solid rgba(27,94,32,.08)
+      ">
+        <!-- gonjong corner deco -->
+        <div style="position:absolute;top:-8px;right:-8px;width:60px;height:60px;opacity:.08">
+          <svg viewBox="0 0 30 30" fill="none"><path d="M15 2L2 18h26L15 2z" fill="#1B5E20"/><path d="M15 6L6 18h18L15 6z" fill="#FFD000"/></svg>
+        </div>
+        <!-- icon -->
+        <div style="
+          width:44px;height:44px;border-radius:50%;
+          background:var(--marawa);display:flex;align-items:center;justify-content:center;
+          margin-bottom:1rem
+        ">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="width:22px;height:22px">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <span style="display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--marawa);margin-bottom:.6rem">Visi</span>
+        <p style="
+          font-size:1.2rem;font-weight:600;font-style:italic;
+          color:var(--dark);line-height:1.7;position:relative;padding-left:1.2rem
+        ">
+          <span style="position:absolute;left:0;top:-4px;font-size:2rem;color:var(--gold);font-family:serif;line-height:1">"</span>
+          Terwujudnya insan yang beriman, bertaqwa, unggul dalam prestasi, berkarakter, dan berwawasan lingkungan
+          <span style="font-size:2rem;color:var(--gold);font-family:serif;line-height:0;vertical-align:-6px">"</span>
+        </p>
       </div>
-      <div style="padding:2rem;border-left:4px solid var(--gold)">
-        <span class="section-label">Misi</span>
-        <ol style="padding-left:1.2rem;font-size:.92rem;color:var(--text);line-height:1.8">
-          <li>Meningkatkan keimanan dan ketakwaan melalui kegiatan keagamaan</li>
-          <li>Mengembangkan kurikulum yang adaptif dan relevan</li>
-          <li>Meningkatkan mutu pembelajaran berbasis teknologi</li>
-          <li>Membentuk karakter siswa yang berakhlak mulia dan berbudaya</li>
-          <li>Menanamkan kepedulian terhadap lingkungan</li>
-          <li>Mengembangkan bakat dan minat melalui ekstrakurikuler</li>
+
+      <!-- MISI CARD -->
+      <div style="
+        position:relative;background:linear-gradient(135deg,var(--cream-dark),var(--white));
+        padding:2.5rem 2rem;border-radius:0;overflow:hidden;
+        box-shadow:0 4px 20px rgba(27,94,32,.08);
+        border:1px solid rgba(27,94,32,.08)
+      ">
+        <!-- gonjong corner -->
+        <div style="position:absolute;top:-8px;right:-8px;width:60px;height:60px;opacity:.08">
+          <svg viewBox="0 0 30 30" fill="none"><path d="M15 2L2 18h26L15 2z" fill="#1B5E20"/><path d="M15 6L6 18h18L15 6z" fill="#FFD000"/></svg>
+        </div>
+        <!-- icon -->
+        <div style="
+          width:44px;height:44px;border-radius:50%;
+          background:var(--gold);display:flex;align-items:center;justify-content:center;
+          margin-bottom:1rem
+        ">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1B5E20" stroke-width="2" style="width:22px;height:22px">
+            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
+            <rect x="9" y="3" width="6" height="4" rx="1"/>
+            <path d="M9 14l2 2 4-4"/>
+          </svg>
+        </div>
+        <span style="display:inline-block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--gold-dark);margin-bottom:.6rem">Misi</span>
+        <ol style="
+          padding-left:1.5rem;margin:0;
+          list-style:none;counter-reset:misi
+        ">
+          <li style="
+            counter-increment:misi;margin-bottom:.65rem;position:relative;
+            padding-left:2rem;font-size:.9rem;color:var(--text);line-height:1.6
+          ">
+            <span style="
+              position:absolute;left:0;top:2px;
+              width:22px;height:22px;border-radius:50%;
+              background:var(--gold);color:var(--dark);
+              font-size:.7rem;font-weight:800;
+              display:flex;align-items:center;justify-content:center
+            ">1</span>
+            Meningkatkan keimanan dan ketakwaan melalui kegiatan keagamaan
+          </li>
+          <li style="
+            counter-increment:misi;margin-bottom:.65rem;position:relative;
+            padding-left:2rem;font-size:.9rem;color:var(--text);line-height:1.6
+          ">
+            <span style="
+              position:absolute;left:0;top:2px;
+              width:22px;height:22px;border-radius:50%;
+              background:var(--gold);color:var(--dark);
+              font-size:.7rem;font-weight:800;
+              display:flex;align-items:center;justify-content:center
+            ">2</span>
+            Mengembangkan kurikulum yang adaptif dan relevan
+          </li>
+          <li style="
+            counter-increment:misi;margin-bottom:.65rem;position:relative;
+            padding-left:2rem;font-size:.9rem;color:var(--text);line-height:1.6
+          ">
+            <span style="
+              position:absolute;left:0;top:2px;
+              width:22px;height:22px;border-radius:50%;
+              background:var(--gold);color:var(--dark);
+              font-size:.7rem;font-weight:800;
+              display:flex;align-items:center;justify-content:center
+            ">3</span>
+            Meningkatkan mutu pembelajaran berbasis teknologi
+          </li>
+          <li style="
+            counter-increment:misi;margin-bottom:.65rem;position:relative;
+            padding-left:2rem;font-size:.9rem;color:var(--text);line-height:1.6
+          ">
+            <span style="
+              position:absolute;left:0;top:2px;
+              width:22px;height:22px;border-radius:50%;
+              background:var(--gold);color:var(--dark);
+              font-size:.7rem;font-weight:800;
+              display:flex;align-items:center;justify-content:center
+            ">4</span>
+            Membentuk karakter siswa yang berakhlak mulia dan berbudaya
+          </li>
+          <li style="
+            counter-increment:misi;margin-bottom:.65rem;position:relative;
+            padding-left:2rem;font-size:.9rem;color:var(--text);line-height:1.6
+          ">
+            <span style="
+              position:absolute;left:0;top:2px;
+              width:22px;height:22px;border-radius:50%;
+              background:var(--gold);color:var(--dark);
+              font-size:.7rem;font-weight:800;
+              display:flex;align-items:center;justify-content:center
+            ">5</span>
+            Menanamkan kepedulian terhadap lingkungan
+          </li>
+          <li style="
+            counter-increment:misi;margin-bottom:0;position:relative;
+            padding-left:2rem;font-size:.9rem;color:var(--text);line-height:1.6
+          ">
+            <span style="
+              position:absolute;left:0;top:2px;
+              width:22px;height:22px;border-radius:50%;
+              background:var(--gold);color:var(--dark);
+              font-size:.7rem;font-weight:800;
+              display:flex;align-items:center;justify-content:center
+            ">6</span>
+            Mengembangkan bakat dan minat melalui ekstrakurikuler
+          </li>
         </ol>
       </div>
     </div>
