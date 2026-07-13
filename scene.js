@@ -111,7 +111,8 @@ ring2.rotation.x = -Math.PI / 4;
 ring2.rotation.y = Math.PI / 6;
 scene.add(ring2);
 
-// Animation
+// Animation — render first frame sync, then rAF loop
+renderer.render(scene, camera);
 var clock = new THREE.Clock();
 function animate() {
   requestAnimationFrame(animate);
