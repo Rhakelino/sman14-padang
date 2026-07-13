@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+// No import needed — THREE global from CDN
 
 const container = document.getElementById('three-container');
 if (!container) return;
