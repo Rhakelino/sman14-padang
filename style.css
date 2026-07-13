@@ -342,3 +342,6 @@ footer{background:var(--dark);color:rgba(255,255,245,.55);position:relative;z-in
   .footer-inner,.jalur-grid{grid-template-columns:1fr}
   .section-offset-right .section-inner,.section-offset-left .section-inner{max-width:100%}
 }
+@media(max-width:600px){
+  #three-container{max-width:280px!important;height:280px!important}
+}

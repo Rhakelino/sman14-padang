@@ -7,6 +7,13 @@
 <meta name="description" content="SMA Negeri 14 Padang — sekolah unggul di Koto Tangah dengan akreditasi A, jurusan IPA dan IPS, serta puluhan ekstrakurikuler.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
 <link rel="stylesheet" href="style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.157.0/build/three.module.js"
+  }
+}
+</script>
 </head>
 <body>
 
@@ -44,15 +51,7 @@
       </div>
     </div>
     <div class="hero-deco">
-      <!-- Gonjong roof silhouette -->
-      <svg viewBox="0 0 280 340" fill="none">
-        <path d="M140 20L20 160h50L140 60l70 100h50L140 20z" fill="currentColor"/>
-        <path d="M140 50L50 180h30l60-90 60 90h30L140 50z" fill="currentColor" opacity=".7"/>
-        <line x1="78" y1="190" x2="78" y2="310" stroke="currentColor" stroke-width=".5" opacity=".3"/>
-        <line x1="202" y1="190" x2="202" y2="310" stroke="currentColor" stroke-width=".5" opacity=".3"/>
-        <path d="M60 310h160l-20-30H80l-20 30z" fill="currentColor" opacity=".5"/>
-        <text x="140" y="295" text-anchor="middle" fill="currentColor" opacity=".2" font-size="8">SMAN 14 PADANG</text>
-      </svg>
+      <div id="three-container" style="width:100%;max-width:380px;height:380px;margin:0 auto"></div>
     </div>
   </div>
 </section>
@@ -189,5 +188,6 @@
 </footer>
 
 <script src="script.js"></script>
+<script type="module" src="scene.js"></script>
 </body>
 </html>
