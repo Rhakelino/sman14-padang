@@ -10,6 +10,7 @@ var h = container.clientHeight || 380;
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(50, w / h, 0.1, 100);
 camera.position.set(3, 2, 5);
+camera.lookAt(0, 0, 0);
 
 var renderer;
 try {
