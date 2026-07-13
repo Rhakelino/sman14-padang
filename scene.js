@@ -1,205 +1,148 @@
-// No import needed — THREE global from CDN
+(function() {
+'use strict';
 
-const container = document.getElementById('three-container');
+var container = document.getElementById('three-container');
 if (!container) return;
 
-let w = container.clientWidth || 380;
-let h = container.clientHeight || 380;
+var w = container.clientWidth || 380;
+var h = container.clientHeight || 380;
 
-const scene = new THREE.Scene();
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 100);
+camera.position.set(3, 2, 5);
 
-const camera = new THREE.PerspectiveCamera(40, w / h, 0.1, 100);
-camera.position.set(2.5, 1.5, 5);
-camera.lookAt(0, 0, 0);
-
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(w, h);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.2;
+renderer.setClearColor(0x000000, 0);
 container.appendChild(renderer.domElement);
 
-// — Lights —
-const ambient = new THREE.AmbientLight(0xffffff, 0.3);
-scene.add(ambient);
-
-const key = new THREE.DirectionalLight(0xffd000, 1.8);
-key.position.set(2, 4, 3);
-scene.add(key);
-
-const fill = new THREE.DirectionalLight(0x1b5e20, 0.6);
-fill.position.set(-3, 1, -2);
-scene.add(fill);
-
-const rim = new THREE.DirectionalLight(0xffffff, 0.4);
-rim.position.set(-1, -2, 4);
-scene.add(rim);
-
-// — Torus Knot (main sculpture) —
-const geom = new THREE.TorusKnotGeometry(1.05, 0.32, 128, 24);
-const mat = new THREE.MeshPhysicalMaterial({
-  color: 0x1b5e20,
-  metalness: 0.7,
+// Main torus knot — green metallic
+var knotGeo = new THREE.TorusKnotGeometry(0.8, 0.3, 128, 16, 2, 3);
+var knotMat = new THREE.MeshPhysicalMaterial({
+  color: 0x1B5E20,
   roughness: 0.25,
-  clearcoat: 0.4,
-  clearcoatRoughness: 0.3,
-  emissive: 0x1b5e20,
+  metalness: 0.85,
+  emissive: 0x1B5E20,
   emissiveIntensity: 0.08,
+  clearcoat: 0.3
 });
-const knot = new THREE.Mesh(geom, mat);
-knot.rotation.x = 0.4;
-knot.rotation.y = 0.3;
+var knot = new THREE.Mesh(knotGeo, knotMat);
 scene.add(knot);
 
-// — Inner wireframe glow —
-const wireGeom = new THREE.TorusKnotGeometry(1.07, 0.34, 64, 12);
-const wireMat = new THREE.MeshBasicMaterial({
-  color: 0xffd000,
+// Wireframe overlay — gold
+var wireMat = new THREE.MeshPhysicalMaterial({
+  color: 0xFFD000,
   wireframe: true,
   transparent: true,
-  opacity: 0.12,
+  opacity: 0.25,
+  roughness: 0.5,
+  metalness: 0.6
 });
-const wire = new THREE.Mesh(wireGeom, wireMat);
-wire.rotation.x = 0.4;
-wire.rotation.y = 0.3;
+var wire = new THREE.Mesh(knotGeo.clone(), wireMat);
+wire.scale.set(1.02, 1.02, 1.02);
 scene.add(wire);
 
-// — Orbiting ring 1 —
-const ring1Geo = new THREE.TorusGeometry(1.6, 0.025, 32, 64);
-const ring1Mat = new THREE.MeshPhysicalMaterial({
-  color: 0xffd000,
-  emissive: 0xffd000,
-  emissiveIntensity: 0.15,
-  metalness: 0.9,
-  roughness: 0.2,
-});
-const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
-ring1.rotation.x = Math.PI / 2.8;
-ring1.rotation.z = 0.3;
-scene.add(ring1);
-
-// — Orbiting ring 2 —
-const ring2 = new THREE.Mesh(
-  new THREE.TorusGeometry(1.85, 0.015, 24, 64),
-  new THREE.MeshPhysicalMaterial({
-    color: 0x2e7d32,
-    emissive: 0x1b5e20,
-    emissiveIntensity: 0.1,
-    metalness: 0.5,
-    roughness: 0.4,
-    transparent: true,
-    opacity: 0.6,
-  })
-);
-ring2.rotation.x = Math.PI / 3.2;
-ring2.rotation.z = -0.5;
-scene.add(ring2);
-
-// — Particles —
-const particleCount = 400;
-const positions = new Float32Array(particleCount * 3);
-const colors = new Float32Array(particleCount * 3);
-for (let i = 0; i < particleCount; i++) {
-  const theta = Math.random() * Math.PI * 2;
-  const phi = Math.acos(2 * Math.random() - 1);
-  const r = 2 + Math.random() * 1.2;
-  positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-  positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-  positions[i * 3 + 2] = r * Math.cos(phi);
-  const c = Math.random() > 0.5 ? 0xffd000 : 0x1b5e20;
-  colors[i * 3] = ((c >> 16) & 0xff) / 255;
-  colors[i * 3 + 1] = ((c >> 8) & 0xff) / 255;
-  colors[i * 3 + 2] = (c & 0xff) / 255;
+// Orbits — ring particles
+var ringCount = 400;
+var ringGeo = new THREE.BufferGeometry();
+var positions = new Float32Array(ringCount * 3);
+var colors = new Float32Array(ringCount * 3);
+for (var i = 0; i < ringCount; i++) {
+  var theta = Math.random() * Math.PI * 2;
+  var phi = Math.acos(2 * Math.random() - 1);
+  var r = 1.6 + Math.random() * 0.4;
+  positions[i*3] = r * Math.sin(phi) * Math.cos(theta);
+  positions[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+  positions[i*3+2] = r * Math.cos(phi);
+  var c = Math.random() > 0.5 ? 0x1B5E20 : 0xFFD000;
+  colors[i*3] = ((c >> 16) & 0xFF) / 255;
+  colors[i*3+1] = ((c >> 8) & 0xFF) / 255;
+  colors[i*3+2] = (c & 0xFF) / 255;
 }
-const ptGeo = new THREE.BufferGeometry();
-ptGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-ptGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-const ptMat = new THREE.PointsMaterial({
+ringGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+ringGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+var ringMat = new THREE.PointsMaterial({
   size: 0.04,
   vertexColors: true,
   transparent: true,
   opacity: 0.8,
   blending: THREE.AdditiveBlending,
-  sizeAttenuation: true,
+  depthWrite: false
 });
-const particles = new THREE.Points(ptGeo, ptMat);
-scene.add(particles);
+var ring = new THREE.Points(ringGeo, ringMat);
+scene.add(ring);
 
-// — Ground glow ring —
-const glowGeo = new THREE.RingGeometry(1.2, 2.4, 48);
-const glowMat = new THREE.MeshBasicMaterial({
-  color: 0xffd000,
-  transparent: true,
-  opacity: 0.06,
-  side: THREE.DoubleSide,
-});
-const glow = new THREE.Mesh(glowGeo, glowMat);
-glow.rotation.x = -Math.PI / 2;
-glow.position.y = -1.3;
-scene.add(glow);
-
-// — Small floating orbs —
-const orbs = [];
-for (let i = 0; i < 8; i++) {
-  const size = 0.04 + Math.random() * 0.06;
-  const orb = new THREE.Mesh(
-    new THREE.SphereGeometry(size, 12, 12),
-    new THREE.MeshPhysicalMaterial({
-      color: Math.random() > 0.5 ? 0xffd000 : 0x2e7d32,
-      emissive: Math.random() > 0.5 ? 0xffd000 : 0x1b5e20,
-      emissiveIntensity: 0.3,
-      metalness: 0.8,
-      roughness: 0.2,
-    })
-  );
-  const angle = (i / 8) * Math.PI * 2;
-  const radius = 2.0 + Math.random() * 0.5;
-  orb.userData = { angle, radius, speed: 0.3 + Math.random() * 0.3, yOff: (Math.random() - 0.5) * 0.8 };
-  orb.position.set(
-    Math.cos(angle) * radius,
-    orb.userData.yOff,
-    Math.sin(angle) * radius
-  );
-  scene.add(orb);
-  orbs.push(orb);
+// Orbiting small spheres
+var orbitGroup = new THREE.Group();
+scene.add(orbitGroup);
+for (var i = 0; i < 10; i++) {
+  var orbSize = 0.035 + Math.random() * 0.045;
+  var orbMat = new THREE.MeshPhysicalMaterial({
+    color: Math.random() > 0.5 ? 0x1B5E20 : 0xFFD000,
+    emissive: Math.random() > 0.5 ? 0x1B5E20 : 0xFFD000,
+    emissiveIntensity: 0.3,
+    roughness: 0.2,
+    metalness: 0.6
+  });
+  var orb = new THREE.Mesh(new THREE.SphereGeometry(orbSize, 8, 8), orbMat);
+  var angle = (i / 10) * Math.PI * 2;
+  var radius = 1.2 + Math.random() * 0.8;
+  orb.position.x = Math.cos(angle) * radius;
+  orb.position.z = Math.sin(angle) * radius;
+  orb.position.y = (Math.random() - 0.5) * 1.0;
+  orb.userData = { angle: angle, radius: radius, speed: 0.004 + Math.random() * 0.008, yOff: orb.position.y };
+  orbitGroup.add(orb);
 }
 
-// — Resize handler —
+// Lights
+var amb = new THREE.AmbientLight(0xffffff, 0.4);
+scene.add(amb);
+var dir1 = new THREE.DirectionalLight(0xFFD000, 1.2);
+dir1.position.set(3, 5, 4);
+scene.add(dir1);
+var dir2 = new THREE.DirectionalLight(0x1B5E20, 0.6);
+dir2.position.set(-3, -2, 2);
+scene.add(dir2);
+var dir3 = new THREE.DirectionalLight(0xffffff, 0.4);
+dir3.position.set(0, -5, 0);
+scene.add(dir3);
+
+// Resize handler
 function resize() {
-  w = container.clientWidth || 380;
-  h = container.clientHeight || 380;
-  camera.aspect = w / h;
-  camera.updateProjectionMatrix();
-  renderer.setSize(w, h);
+  var nw = container.clientWidth || 380;
+  var nh = container.clientHeight || 380;
+  if (nw !== w || nh !== h) {
+    w = nw; h = nh;
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
 }
-window.addEventListener('resize', resize);
-const ro = new ResizeObserver(resize);
-ro.observe(container);
 
-// — Animation loop —
-function animate(t) {
+// Animation loop
+function animate() {
   requestAnimationFrame(animate);
-  const speed = t * 0.0003;
+  resize();
 
-  knot.rotation.x = 0.4 + Math.sin(speed * 0.7) * 0.1;
-  knot.rotation.y = speed * 0.8 + 0.3;
-  wire.rotation.copy(knot.rotation);
+  knot.rotation.x += 0.005;
+  knot.rotation.y += 0.012;
+  knot.rotation.z += 0.003;
+  wire.rotation.x -= 0.003;
+  wire.rotation.y -= 0.008;
+  wire.rotation.z -= 0.002;
 
-  ring1.rotation.x = Math.PI / 2.8 + Math.sin(speed * 0.4) * 0.05;
-  ring1.rotation.z = 0.3 + speed * 0.2;
-  ring2.rotation.x = Math.PI / 3.2 + Math.sin(speed * 0.3 + 1) * 0.05;
-  ring2.rotation.z = -0.5 + speed * 0.15;
+  ring.rotation.y += 0.002;
+  ring.rotation.x += 0.001;
 
-  particles.rotation.y = speed * 0.15;
-  glow.rotation.z = speed * 0.1;
-
-  orbs.forEach((orb, i) => {
-    const a = orb.userData.angle + speed * orb.userData.speed;
-    orb.position.x = Math.cos(a) * orb.userData.radius;
-    orb.position.z = Math.sin(a) * orb.userData.radius;
-    orb.position.y = orb.userData.yOff + Math.sin(speed * 2 + i) * 0.2;
+  orbitGroup.rotation.y += 0.006;
+  orbitGroup.children.forEach(function(child, idx) {
+    child.position.y = child.userData.yOff + Math.sin(Date.now() * child.userData.speed * 50 + idx) * 0.2;
   });
 
   renderer.render(scene, camera);
 }
-animate(0);
+
+animate();
+
+})();
