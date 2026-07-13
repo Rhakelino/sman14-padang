@@ -72,27 +72,42 @@ h4{font-size:clamp(1rem,2vw,1.25rem)}
 /* ============ NAVIGATION ============ */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:1000;
-  padding:.85rem 0;
-  background:rgba(255,255,255,.92);backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(27,94,32,.06);
+  background:rgba(255,255,255,.95);backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(27,94,32,.07);
   transition:all .3s ease
 }
-nav.scrolled{
-  box-shadow:0 2px 24px rgba(0,0,0,.06);
-  padding:.5rem 0
+nav .nav-inner{
+  max-width:1200px;margin:0 auto;padding:0 1.5rem;
+  display:flex;justify-content:space-between;align-items:center;height:60px
 }
-.nav-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
-.nav-logo{display:flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--green);font-weight:800;font-size:1rem}
-.nav-logo-gonjong{width:24px;height:24px;flex-shrink:0}
-.nav-links{display:flex;gap:.25rem;list-style:none;align-items:center}
+nav.scrolled .nav-inner{height:52px}
+.nav-brand{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+.nav-brand-icon{width:28px;height:28px;flex-shrink:0}
+.nav-brand-text{
+  font-size:1rem;font-weight:800;color:var(--green);
+  letter-spacing:-.02em
+}
+.nav-brand-text span{color:var(--green-dark);font-weight:400}
+.nav-links{display:flex;gap:0;list-style:none;align-items:center;height:100%}
 .nav-links a{
-  color:var(--text);text-decoration:none;padding:.4rem .9rem;
-  font-size:.82rem;font-weight:500;transition:all .25s;border-radius:6px
+  position:relative;display:flex;align-items:center;height:100%;
+  color:var(--text-light);text-decoration:none;padding:0 1.1rem;
+  font-size:.82rem;font-weight:500;transition:color .25s
 }
-.nav-links a:hover{color:var(--green);background:rgba(27,94,32,.05)}
-.nav-links a.active{color:var(--green);background:rgba(27,94,32,.08);font-weight:600}
-.hamburger{display:none;background:none;border:none;cursor:pointer;padding:6px;flex-direction:column;gap:5px}
-.hamburger span{display:block;width:22px;height:2px;background:var(--green);border-radius:2px;transition:all .3s}
+.nav-links a::after{
+  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:0;height:2.5px;border-radius:3px 3px 0 0;
+  background:var(--green);transition:width .25s ease
+}
+.nav-links a:hover{color:var(--green)}
+.nav-links a:hover::after{width:20px}
+.nav-links a.active{color:var(--green);font-weight:600}
+.nav-links a.active::after{width:24px;background:var(--green)}
+.hamburger{
+  display:none;background:none;border:none;cursor:pointer;
+  padding:4px;flex-direction:column;gap:4px
+}
+.hamburger span{display:block;width:20px;height:2px;background:var(--green);border-radius:2px;transition:all .3s}
 
 /* ============ GONJONG ROOF DECO ============ */
 .gonjong-roof{display:block;width:100%;line-height:0}
